@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="/css/home.less">
-</head>
+<html lang="en" xmlns:th="https://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="_layout">
+
+<th:block layout:fragment="styles">
+    <link rel="stylesheet/less" type="text/css" href="/css/home.less">
+</th:block>
+
 <body>
-    <div>
-        PROJECT
-    </div>
+
+<div layout:fragment="content">
+    <h1 th:text="${projectTitle}" id="project-title"></h1>
+</div>
+
+
+
 </body>
 </html>
