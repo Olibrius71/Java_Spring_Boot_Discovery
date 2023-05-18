@@ -1,0 +1,13 @@
+server:
+    port: 6060
+
+
+spring:
+    application:
+        name: Discovery
+
+    datasource:
+        url: jdbc:postgresql://localhost:7000/projetSpringBoot
+        username: postgres
+        password: MohamedTwinTowers1109
+
