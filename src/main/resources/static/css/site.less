@@ -16,19 +16,21 @@ html, body {
 }
 
 header {
-    height: 11vh;
+    height: max(11vh,60px);
     position: sticky;
-    background-color: @white-color !important;
+    background-color: @bg-color !important;
     .flex(@justify: center);
     align-items: center;
 
-    border-bottom: 5px solid @white-color;
+    border-bottom: 3px solid lighten(@white-color, 30%);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 
     h1 {
         font-size: 2.4rem;
-        .better_gradient_text(#2CA6A4, #9DD9D2, blueviolet);
+        background-image: linear-gradient(to bottom, #0072EC, #FB36F4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         width: fit-content;
 
         margin: 0;
@@ -41,11 +43,61 @@ header {
 
 
         ul {
+            list-style: none;
             .flex(row);
             width: 60%;
+
+            a {
+                font-size: 1.7rem;
+            }
         }
 
     }
 
 
+    .logout-button {
+        cursor: pointer;
+        padding: .55vh .5vw;
+        font-size: 1.5rem;
+
+        background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+
+
+        //  background-color: saturate(darken(@primary-color,25%), 20%);
+        color: @white-color;
+
+        border-radius: 6px;
+    }
 }
+
+
+
+
+
+a {
+    text-decoration: none;
+    color: @white-color;
+    position: relative;
+
+    &:after {
+        content: "";
+        position: absolute;
+        width: 0%;
+        height: 1px;
+        left: 0;
+        bottom: -15%;
+        background-color: @white-color;
+        color: @white-color;
+        transition: all 0.3s ease;
+    }
+
+    &:hover:after {
+        width: 100%;
+        height: 2px;
+        background-color: @white-color;
+        color: @white-color;
+        transition: all 0.3s ease;
+    }
+}
+
+

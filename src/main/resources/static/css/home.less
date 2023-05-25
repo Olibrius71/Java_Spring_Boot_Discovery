@@ -1,5 +1,28 @@
+@import "functions";
+@import "site";
+
 @h1-color: #0076ff;
 
-#project-title {
-    background-color: @h1-color;
+.title-container {
+    .flex();
+
+    #project-title {
+        color: @white-color;
+        font-size: 2.7rem;
+
+        background-image: linear-gradient(to bottom, #0072EC, #FB36F4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+
+.home-content {
+    .flex();
+
+
+    #welcome-message {
+        font-size: 1.4rem;
+        color: @white-color;
+    }
 }
