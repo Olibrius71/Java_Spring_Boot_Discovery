@@ -1,0 +1,79 @@
+@import "site";
+@import "functions";
+
+.main-content {
+    .flex();
+    padding-top: 9vh;
+}
+
+.login-container {
+    width: 24%;
+    height: 45vh;
+    background-color: @black-color;
+
+    .bordered();
+
+    .flex();
+
+    padding: 0 1vw;
+
+
+    .login-title {
+        color: @white-color;
+        font-size: 2.35rem;
+
+        margin: 0;
+    }
+
+
+    form {
+        .flex();
+        width: 90%;
+
+        .form-info-container {
+            .flex(@align: left);
+            margin: 1vh 0;
+            width: 95%;
+
+            label {
+                color: @white-color;
+                font-size: 1.4rem;
+                margin-bottom: 1px;
+            }
+
+            input {
+                width: 95%;
+                height: 4vh;
+                .bordered(@border-color: @primary-color, @radius: 10px);
+                background-color: desaturate(darken(@white-color,10%),20%);
+            }
+        }
+
+
+        button {
+            padding: 3px 5px;
+            color: @white-color;
+            font-size: 1.15rem;
+            background-color: @primary-color;
+            .bordered(@border-color: @black-color, @radius: 12px);
+
+            margin: 3vh 0 0 0;
+        }
+    }
+}
+
+.sign-up-link-container {
+    height: 8%;
+    .flex();
+
+    .sign-up-p {
+        color: @white-color;
+        font-size: 1.05rem;
+
+        margin: 0;
+    }
+
+    .sign-up-link, .sign-up-link:hover, .sign-up-link:visited {
+        color: deepskyblue;
+    }
+}

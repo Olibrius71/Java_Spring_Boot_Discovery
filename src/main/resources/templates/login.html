@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout">
+
+<th:block layout:fragment="styles">
+    <link rel="stylesheet/less" type="text/css" href="/css/login.less">
+</th:block>
+
+<body>
+
+<div layout:fragment="content" class="main-content">
+    <div class="login-container">
+        <h2 class="login-title">Connexion</h2>
+
+        <form>
+            <div class="form-info-container">
+                <label>Nom d'utilisateur:</label>
+                <input type="text">  <!-- <input type="text" th:field="*{nickname}">  -->
+            </div>
+
+            <div class="form-info-container">
+                <label>Mot de passe:</label>
+                <input type="password">   <!--  <input type="password" th:field="*{password}">  -->
+            </div>
+
+            <button type="submit" class="login-valid">Connexion</button>
+        </form>
+
+        <div class="sign-up-link-container">
+            <p class="sign-up-p">Vous n'avez pas encore de compte?</p>
+            <a class="sign-up-link">Créez un compte</a>
+        </div>
+    </div>
+</div>
+
+
+<!--
+<th:block layout:fragment="scripts">
+    <script src="js/.js" type="text/javascript"></script>
+</th:block>
+-->
+</body>
+</html>
+

@@ -11,6 +11,6 @@ public class HomeController {
     public String Home(Model model) {
         model.addAttribute("projectTitle","Spring Boot Discovery Project");
         model.addAttribute("userName","Utilisateur");
-        return "home.html";
+        return "home";
     }
 }
