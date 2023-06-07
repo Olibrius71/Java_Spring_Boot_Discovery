@@ -8,8 +8,34 @@
 
 <body>
 
-<div layout:fragment="content">
+<div layout:fragment="content" class="main-content">
+    <div class="login-container sign-up-container">
+        <h2 class="login-title">Créer un compte</h2>
 
+        <form th:action="@{/try-sign-up}" method="post">
+            <div class="form-info-container">
+                <label>Adresse Mail:</label>
+                <input type="text" name="mailAddress">
+            </div>
+
+            <div class="form-info-container">
+                <label>Nom d'utilisateur:</label>
+                <input type="text" name="nickname">
+            </div>
+
+            <div class="form-info-container">
+                <label>Mot de passe:</label>
+                <input type="password" name="password">
+            </div>
+
+            <button type="submit" class="login-valid">Connexion</button>
+        </form>
+
+        <div class="sign-up-link-container">
+            <p class="sign-up-p">Vous n'avez pas encore de compte?</p>
+            <a class="sign-up-link" href="sign-up">Créez un compte</a>
+        </div>
+    </div>
 </div>
 
 

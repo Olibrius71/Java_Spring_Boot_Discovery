@@ -11,11 +11,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    public int id;
+    public Integer id;
 
     @NotNull
     @Column(unique = true)
@@ -24,13 +24,22 @@ public class User {
 
     @NotNull
     @Column(unique = true)
-    @Min(6)
+    @Size(min = 6)
     public String nickname;
 
     @NotNull
     @Column
-    @Min(10)
+    @Size(min = 10)
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$",
              message = "Le mot de pass doit contenir au moins une lettre MAJUSCULE, une lettre minuscule et un chiffre")
     public String password;
+
+
+    public AppUser(String mailAddress,
+                String nickname,
+                String password) {
+        this.mailAddress = mailAddress;
+        this.nickname = nickname;
+        this.password = password;
+    }
 }

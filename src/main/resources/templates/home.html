@@ -7,13 +7,13 @@
 
 <body>
 
-<div layout:fragment="content">
+<div layout:fragment="content" class="main-content">
     <div class="title-container">
         <h1 th:text="${projectTitle}" id="project-title"></h1>
     </div>
     <div class="home-content">
         <div th:text="'Bienvenue ' + ${userName}" id="welcome-message"></div>
-        <a href="log-in.html"></a>
+        <a class="login-link" href="login">Se connecter</a>
     </div>
 </div>
 

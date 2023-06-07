@@ -9,18 +9,23 @@
 <body>
 
 <div layout:fragment="content" class="main-content">
+
+    <div th:if="${wrongAccountInfo != null}" th:text="${wrongAccountInfo}" class="error-login-alert">
+
+    </div>
+
     <div class="login-container">
         <h2 class="login-title">Connexion</h2>
 
-        <form>
+        <form th:action="@{/try-login}" method="post">
             <div class="form-info-container">
                 <label>Nom d'utilisateur:</label>
-                <input type="text">  <!-- <input type="text" th:field="*{nickname}">  -->
+                <input type="text" name="nickname">  <!-- <input type="text" th:field="*{nickname}">  -->
             </div>
 
             <div class="form-info-container">
                 <label>Mot de passe:</label>
-                <input type="password">   <!--  <input type="password" th:field="*{password}">  -->
+                <input type="password" name="password">   <!--  <input type="password" th:field="*{password}">  -->
             </div>
 
             <button type="submit" class="login-valid">Connexion</button>
@@ -28,7 +33,7 @@
 
         <div class="sign-up-link-container">
             <p class="sign-up-p">Vous n'avez pas encore de compte?</p>
-            <a class="sign-up-link">Créez un compte</a>
+            <a class="sign-up-link" href="sign-up">Créez un compte</a>
         </div>
     </div>
 </div>
