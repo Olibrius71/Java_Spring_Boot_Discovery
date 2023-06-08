@@ -9,10 +9,10 @@
 
 <div layout:fragment="content" class="main-content">
     <div class="title-container">
-        <h1 th:text="${projectTitle}" id="project-title"></h1>
+        <h1 th:text="${projectTitle}" id="project-title">Spring Boot Discovery Project</h1>
     </div>
     <div class="home-content">
-        <div th:text="'Bienvenue ' + ${userName}" id="welcome-message"></div>
+        <div th:text="'Bienvenue ' + ${session.userNickname}" id="welcome-message"></div>
         <a class="login-link" href="login">Se connecter</a>
     </div>
 </div>

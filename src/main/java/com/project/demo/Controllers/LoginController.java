@@ -2,6 +2,7 @@ package com.project.demo.Controllers;
 
 
 import com.project.demo.Services.AppUserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,10 +25,13 @@ public class LoginController {
 
     @PostMapping("/try-login")
     public String tryLogin(@RequestParam("nickname") String nickname,
-                        @RequestParam("password") String password,
-                        Model model) {
+                           @RequestParam("password") String password,
+                           Model model,
+                           HttpSession httpSession) {
         if (appUserService.checkIfExistsAndPasswordCorrect(nickname,password)) {
-            return "home";
+            httpSession.setAttribute("loggedIn",true);
+            httpSession.setAttribute("userNickname",nickname);
+            return "redirect:/";
         }
         model.addAttribute("wrongAccountInfo","Le Nom d'Utilisateur ou le Mot de Passe est incorrect");
         return "login";
