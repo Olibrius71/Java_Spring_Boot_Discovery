@@ -9,6 +9,10 @@
 <body>
 
 <div layout:fragment="content" class="main-content">
+    <div th:if="${attributeConstraintNotRespected != null}" th:text="${attributeConstraintNotRespected}" class="error-login-alert">
+
+    </div>
+
     <div class="login-container sign-up-container">
         <h2 class="login-title">Créer un compte</h2>
 

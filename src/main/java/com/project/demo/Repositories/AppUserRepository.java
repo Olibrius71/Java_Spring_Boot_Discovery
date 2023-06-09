@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AppUserRepository extends JpaRepository<AppUser, Integer> {
+
     @Override
     Optional<AppUser> findById(Integer integer);
 
@@ -32,7 +33,7 @@ public interface AppUserRepository extends JpaRepository<AppUser, Integer> {
     @Override
     void deleteById(Integer integer);
 
-
+    boolean existsByMailAddress(@NonNull String mailAddress);
     boolean existsByNickname(@NonNull String nickname);
 
     boolean existsByNicknameAndPassword(@NonNull String nickname, @NonNull String password);
