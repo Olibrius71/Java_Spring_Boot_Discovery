@@ -1,0 +1,12 @@
+
+
+<div th:fragment="homeLinkDiv" class="home-link-div" th:attr="onclick=|window.location.href='${pageLink}'|">
+    <div class="info-container title-container">
+        <h2 th:text="${titleText}"></h2>
+    </div>
+
+    <div class="info-container description-container">
+        <p th:text="${descriptionText}">
+        </p>
+    </div>
+</div>
