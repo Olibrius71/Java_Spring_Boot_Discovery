@@ -1,2 +1,54 @@
 @import "site";
 @import "functions";
+
+.main-content {
+    .flex();
+    padding: 3vh 0;
+}
+
+.game-title {
+    font-size: 2.3rem;
+}
+
+.game-time-progress-bar {
+    width: 75%;
+    height: 3.2vh;
+    .bordered(@border-size: 2px);
+    background-color: @black-color;
+
+    .ui-progressbar-value {
+        height: 95%;
+        border-radius: 7px;
+
+        background-image: radial-gradient( circle farthest-corner at 22.4% 21.7%, rgba(4,189,228,1) 0%, rgba(2,83,185,1) 100.2% );
+       // background-image: linear-gradient(to right, #8e2de2, #4a00e0);
+
+        //background-color: @primary-color;*
+        //background-image: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
+    }
+}
+
+
+.game-container {
+    width: 90%;
+    height: 65vh;
+    .flex();
+
+    .game-grid {
+        width: 50%;
+        height: 80%;
+
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+
+        .game-card-container {
+            padding: 1rem 0.7rem;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
