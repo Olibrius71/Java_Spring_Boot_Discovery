@@ -32,6 +32,7 @@ dependencies {
 
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.2.0' // Pour le layout
 	implementation 'org.postgresql:postgresql:42.6.0' // pour le dialect PostGreSQL
+
 }
 
 tasks.named('test') {

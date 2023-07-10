@@ -5,7 +5,7 @@ $(document).ready(function() {
     let progessBarTime = 30; // en secondes
     let timeToSeeCards = 2.5; // en secondes
 
-    let nbPairFound = 0;      // nombre de paires trouvées, chiffre de 0 à 12
+    let nbPairsFound = 0;      // nombre de paires trouvées, chiffre de 0 à 12
 
     $(".game-time-progress-bar").progressbar({
         value: 100,
@@ -23,7 +23,10 @@ $(document).ready(function() {
 
             $(".game-time-progress-bar").progressbar("option", "value", currentPbValue - 1);
 
-            if (currentPbValue == 0) clearInterval(progBarTimeRunning);
+            if (currentPbValue == 0) {
+                clearInterval(progBarTimeRunning);
+                endGameSaveData();
+            }
         }, intervalUpdate);
 
     }
@@ -70,14 +73,16 @@ $(document).ready(function() {
     }
 
 
-    function hideCard(cardToHide) {    // Ca récupère l'élément HTML de l'image de la carte en question (pas la retournée)
-        cardToHide.toggle("puff", 100);
-        cardToHide.prev().toggle("puff", 100);
+    function hideCard(cardToHide) {    // Ca récupère l'élément HTML de l'image de la carte retournée mais il faut d'abord animer la normale
+        cardToHide.next().toggle("blind", function () {
+            cardToHide.toggle("blind");
+        });
     }
 
     function showCard(cardToShow) {  // Ca récupérera l'élément HTML de l'image de la carte retournée
-        cardToShow.toggle("puff", 100);
-        cardToShow.next().next().toggle("puff", 100);
+        cardToShow.toggle("blind", function () {
+            cardToShow.next().toggle("blind");
+        });
     }
 
     function hideAllCards() {
@@ -100,34 +105,78 @@ $(document).ready(function() {
         runProgressBar(progessBarTime);
     }, timeToSeeCards * 1000);
 
+    // card_backside est tout le temps le first-child et la carte avec la valeur affectée le last-child
+    // la méthode hideAllcards change la propriété display des cartes
 
+    // Tant que l'animation est pas finie, un autre tag img sera créé entre les 2 et supprimé à la fin
+    // de l'animation donc il faut un seul next() si l'animation est finie et 2 si elle l'est pas encore
 
+    let cardsPathsOfPairsFound = [];
 
     let selectedCard = null;
+    let previousSelectedCardBackside = null;
 
     $(".game-card-container > img:first-child").click( function () {
+
+        if (cardsPathsOfPairsFound.includes($(this).attr("src"))) { // Pour sortir du lstener si on a cliqué sur une carte d'une paire déjà révélée
+            console.log(cardsPathsOfPairsFound);
+            return;
+        }
+
         showCard($(this));
 
-        if (selectedCard == null) {
-            selectedCard = new Card($(this).attr("src"));
+        let selectedCardBackside = $(this);
+
+
+        setTimeout( function () {   // Pour que le reste soit exécuté dès que l'animation est terminée
+
+            if (selectedCard == null) {
+                selectedCard = new Card(selectedCardBackside.next().attr("src"));
+                previousSelectedCardBackside = selectedCardBackside;
+            } else {
+                let newCard = new Card(selectedCardBackside.next().attr("src"));
+                if (selectedCard.isPair(newCard)) {
+                    nbPairsFound++;
+                    cardsPathsOfPairsFound.push(selectedCardBackside.next().attr("src"));
+                    cardsPathsOfPairsFound.push(previousSelectedCardBackside.next().attr("src"));
+                } else {
+                    hideCard(selectedCardBackside);
+                    hideCard(previousSelectedCardBackside);
+                }
+                selectedCard = null;
+                previousSelectedCardBackside = null;
+            }
+        }, 1100);
+    });
+
+    function endGameSaveData() {
+        console.log("END OF GAME");
+        if (nbPairsFound == 12) {
+            $.ajax({
+                url: "save-game-data",
+                type: "POST",
+                data: {
+                    victory: false,
+                    totalTime: progessBarTime,
+                    timeToSeeCards: timeToSeeCards,
+                    timeToWin: $(".game-time-progress-bar").progressbar("option", "value")
+                }
+            });
         }
         else {
-            let newCard = new Card($(this).attr("src"));
-            if (selectedCard.isPair(newCard)) {
-                // console.log("eeeeee");
-            }
-            else {
-                // console.log("ffffff");
-            }
-            selectedCard = null;
+            $.ajax({
+                url: "save-game-data",
+                type: "POST",
+                data: {
+                    victory: false,
+                    totalTime: progessBarTime,
+                    timeToSeeCards: timeToSeeCards,
+                    nbPairsFound: nbPairsFound
+                },
+                success: function (response) {
+                    window.location.href = "/"
+                }
+            });
         }
-    });
-
-    /*
-    $(".game-card-container > img:last-child").click( function () {
-       hideCard($(this));
-    });
-
-     */
-
+    }
 });
