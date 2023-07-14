@@ -151,15 +151,20 @@ $(document).ready(function() {
 
     function endGameSaveData() {
         console.log("END OF GAME");
-        if (nbPairsFound == 12) {
+        if (nbPairsFound === 12) {
             $.ajax({
                 url: "save-game-data",
                 type: "POST",
                 data: {
-                    victory: false,
+                    victory: true,
                     totalTime: progessBarTime,
                     timeToSeeCards: timeToSeeCards,
                     timeToWin: $(".game-time-progress-bar").progressbar("option", "value")
+                },
+                success: function () {
+                    setTimeout(() => {
+                        window.location.href = "/";
+                    }, 2000);
                 }
             });
         }
@@ -174,7 +179,9 @@ $(document).ready(function() {
                     nbPairsFound: nbPairsFound
                 },
                 success: function (response) {
-                    window.location.href = "/"
+                    setTimeout(() => {
+                        window.location.href = "/";
+                    }, 2000);
                 }
             });
         }

@@ -1,6 +1,14 @@
 package com.project.demo.Controllers;
 
 
+import com.project.demo.Entities.AppUser;
+import com.project.demo.Entities.Game;
+import com.project.demo.Repositories.AppUserRepository;
+import com.project.demo.Repositories.GameRepository;
+import com.project.demo.Services.AppUserService;
+import com.project.demo.Services.GameService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,6 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class GameController {
+
+    @Autowired
+    private AppUserService appUserService;
+
+    @Autowired
+    private GameService gameService;
 
     @GetMapping("/game")
     public String viewGame() {
@@ -28,8 +42,22 @@ public class GameController {
                           @RequestParam("totalTime") Float totalTime,
                           @RequestParam("timeToSeeCards") Float timeToSeeCards,
                           @RequestParam(value = "timeToWin", required = false) Float timeToWin,
-                          @RequestParam(value = "nbPairsFound", required = false) Integer nbPairsFound) {
+                          @RequestParam(value = "nbPairsFound", required = false) Integer nbPairsFound,
+                          HttpSession httpSession) {
         System.out.println(victory + "  " + totalTime + "  " + timeToSeeCards + "  " + timeToWin + "  " + "  " + nbPairsFound);
-        return "redirect:/";
+        Game newGame = null;
+        AppUser currentUser = appUserService.getUserByNickname((String) httpSession.getAttribute("userNickname"));
+
+        if (timeToWin != null) {
+            newGame = new Game(currentUser,victory,totalTime,timeToSeeCards,timeToWin);
+        }
+        else {
+            newGame = new Game(currentUser,victory,totalTime,timeToSeeCards,nbPairsFound);
+        }
+
+        gameService.addGameToGames(newGame);
+        appUserService.addGameToUser(newGame, currentUser.getId());
+
+        return "redirect:/";  // Cela ne redirige pas, c'est le code javascript qui redirige
     }
 }

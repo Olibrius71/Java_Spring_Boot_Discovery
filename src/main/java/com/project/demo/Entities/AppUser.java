@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Getter
@@ -35,11 +38,23 @@ public class AppUser {
     public String password;
 
 
+    @OneToMany(mappedBy = "userPlaying")
+    public List<Game> gamesPlayed;
+
+
     public AppUser(String mailAddress,
                 String nickname,
                 String password) {
         this.mailAddress = mailAddress;
         this.nickname = nickname;
         this.password = password;
+        this.gamesPlayed = new ArrayList<Game>();
     }
+
+
+    public void addGame(Game newGame) {
+        gamesPlayed.add(newGame);
+    }
+
+
 }

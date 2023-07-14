@@ -1,6 +1,7 @@
 package com.project.demo.Services;
 
 import com.project.demo.Entities.AppUser;
+import com.project.demo.Entities.Game;
 import com.project.demo.Repositories.AppUserRepository;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -32,5 +33,14 @@ public class AppUserService {
 
     public Boolean checkIfAlreadyExists(String newMailAddress, String newNickname) {
         return appUserRepository.existsByMailAddress(newMailAddress) || appUserRepository.existsByNickname(newNickname);
+    }
+
+    public AppUser getUserByNickname(String nickname) {
+        return appUserRepository.findByNickname(nickname);
+    }
+
+    public void addGameToUser(Game newGame, Integer userId) {
+        AppUser userToUpdate = appUserRepository.findById(userId).orElseThrow();
+        userToUpdate.addGame(newGame);
     }
 }
