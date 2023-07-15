@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout">
+
+<th:block layout:fragment="styles">
+    <link rel="stylesheet/less" type="text/css" href="/css/previous-games.less">
+</th:block>
+
+<body>
+
+<div layout:fragment="content" class="main-content">
+    <div class="page-title previous-games-title">Parties Précédentes</div>
+    <section class="previous-table-container">
+        <div class="previous-table">
+
+            <div class="header">
+                <div class="table-element-wrapper">
+                    <p>Résultat</p>
+                </div>
+                <div class="table-element-wrapper">
+                    <p>Durée initiale de la partie</p>
+                </div>
+                <div class="table-element-wrapper">
+                    <p>Temps pour voir les cartes</p>
+                </div>
+                <div class="table-element-wrapper">
+                    <p>Temps pour gagner</p>
+                </div>
+                <div class="table-element-wrapper">
+                    <p>Nombre de paires trouvées (sur 12)</p>
+                </div>
+            </div>
+
+            <div class="row" th:each="previousGame: ${gamesOfUser}">
+                <div class="table-element-wrapper">
+                    <p th:if="${previousGame.victory}" class="victory-text victory">VICTOIRE</p>
+                    <p th:unless="${previousGame.victory}" class="victory-text defeat">DEFAITE</p>
+                </div>
+
+                <div class="table-element-wrapper">
+                    <p th:text="${previousGame.totalTime} + 's' "></p>
+                </div>
+                <div class="table-element-wrapper">
+                    <p th:text="${previousGame.timeToSeeCards} + 's' "></p>
+                </div>
+                <div class="table-element-wrapper">
+                    <p th:text="${previousGame.timeToWin}"></p>
+                </div>
+                <div class="table-element-wrapper">
+                    <p th:text="${previousGame.nbPairsFound}"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<!--
+<th:block layout:fragment="scripts">
+    <script src="js/.js" type="text/javascript"></script>
+</th:block>
+-->
+</body>
+</html>
+

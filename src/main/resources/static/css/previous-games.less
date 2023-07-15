@@ -1,0 +1,56 @@
+@import "site";
+@import "functions";
+
+.main-content {
+    .flex();
+    .previous-games-title {
+        font-size: 2.6rem;
+        margin: 2vh 0 4vh 0;
+    }
+}
+
+
+.previous-table-container {
+    .flex();
+}
+
+.previous-table {
+    width: 80vw;
+    .flex();
+
+    .header, .row {
+        width: 90%;
+        .flex(@direction: row);
+
+        .table-element-wrapper {
+            width: 16.5%;
+            height: 100%;
+            .flex();
+
+            p {
+                font-size: 1.3rem;
+                text-align: center;
+            }
+        }
+    }
+
+    .row {
+        border-top: 2px ridge darkslategray;
+
+
+        .victory-text {
+            font-weight: bold;
+        }
+        .victory {
+            color: limegreen;
+        }
+        .defeat {
+            color: orangered;
+        }
+
+
+        p {
+            font-size: 1.17rem;
+        }
+    }
+}

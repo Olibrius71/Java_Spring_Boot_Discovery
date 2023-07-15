@@ -13,14 +13,11 @@
         <div th:text="'Bienvenue ' + ${session.userNickname}" id="welcome-message"></div>
 
         <div class="link-divs-container">
-            <div th:replace="~{fragments/_home_link_div.html :: homeLinkDiv(pageLink = '', titleText = 'Parties Précédentes', descriptionText = 'Voir les parties que vous avez jouez précédemment avec les informations les concernant telles que le score obtenu')}">
-            </div>
+            <div th:replace="~{fragments/_home_link_div.html :: homeLinkDiv(pageLink = 'previous-games', titleText = 'Parties Précédentes', descriptionText = 'Voir les parties que vous avez jouez précédemment avec les informations les concernant telles que le score obtenu')}"></div>
 
-            <div th:replace="~{fragments/_home_link_div.html :: homeLinkDiv(pageLink = 'game', titleText = 'Nouvelle Partie', descriptionText = 'Démarrer une nouvelle partie dont le résultat sera enregistré dans votre compte')}">
-            </div>
+            <div th:replace="~{fragments/_home_link_div.html :: homeLinkDiv(pageLink = 'game', titleText = 'Nouvelle Partie', descriptionText = 'Démarrer une nouvelle partie dont le résultat sera enregistré dans votre compte')}"></div>
 
-            <div th:replace="~{fragments/_home_link_div.html :: homeLinkDiv(pageLink = '', titleText = 'Comparer mon score', descriptionText = 'Comparer votre score total et vos parties avec celles des autres joueurs')}">
-            </div>
+            <div th:replace="~{fragments/_home_link_div.html :: homeLinkDiv(pageLink = '', titleText = 'Comparer mon score', descriptionText = 'Comparer votre score total et vos parties avec celles des autres joueurs')}"></div>
         </div>
 
     </div>

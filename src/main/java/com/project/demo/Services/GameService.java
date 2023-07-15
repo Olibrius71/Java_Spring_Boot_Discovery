@@ -13,12 +13,12 @@ public class GameService {
     @Autowired
     private GameRepository gameRepository;
 
-    /*
-    public ArrayList<Game> getAllGamesOfUser(Integer idOfUser) {
-        ArrayList<Game> gamesOfUser = (ArrayList<Game>) gameRepository.findAllBy(idOfUser);
+
+    public ArrayList<Game> getAllGamesOfUser(String userNickname) {
+        ArrayList<Game> gamesOfUser = (ArrayList<Game>) gameRepository.findByUserPlayingNickname(userNickname);
         return gamesOfUser;
     }
-    */
+
     public void addGameToGames(Game newGame) {
         gameRepository.save(newGame);
     }
